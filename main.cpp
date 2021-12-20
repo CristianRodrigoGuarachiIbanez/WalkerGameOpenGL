@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cmath>
 #define GLEW_STATIC
 #include <GL/glew.h>
 #define SDL_MAIN_HANDLED
@@ -23,6 +24,8 @@ void openGLDebugCallBack(GLenum source, GLenum type, GLuint id, GLenum severity,
     //if(severity== GL_DEBUG_SEVERITY_HIGH)
     std::cout<< "[Opengl Error]: "<< msg<<std::endl;
 }
+
+#define GLCALL(call) call
 
 
 int main(int argc, char**argv){
@@ -80,22 +83,21 @@ int main(int argc, char**argv){
     float32 delta = 0.0f;
     
     int colorUniformLocation = GLCALL(glGetUniformLocation(shader.getShaderID(), "u_color"));
-    if(colorUniformLocation!=-1){
-        glUniform4f(colorUniformLocation, 1.0f, 0.1f, 0.1f, 0.1f);
+    if(!colorUniformLocation!=-1){
+        GLCALL(glUniform4f(colorUniformLocation, 1.0f, 0.1f, 0.1f, 0.1f));
     }
+    float time = 0.0f;
+
     bool close = false;
     while(!close){
         glClearColor(1.0f, 0.0f,1.0f,1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
-        /*
-        // zeichnen
-        glBegin(GL_TRIANGLES);
-        glVertex2f(-0.5f, -0.5f);
-        glVertex2f(0.0f, 0.5f);
-        glVertex2d(0.5f, -0.5f);
-
-        glEnd();
-        */
+        time+=delta;
+        if(!colorUniformLocation!=-1){
+            float sin_n =  sinf(time)*sinf(time);
+            std::cout<<"Time: "<< sin_n<<std::endl;
+            GLCALL(glUniform4f(colorUniformLocation,sin_n, 0.0f, 1.0f, 1.0f));
+        }
         //wire frame
         //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
         vertexBuffer.Bind();
