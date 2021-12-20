@@ -1,0 +1,10 @@
+GLuint vertexBuffer;
+glGenBuffers(1,&vertexBuffer);
+std::cout<<"Vertesx Buffer: "<< vertexBuffer<<std::endl;
+glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
+glBufferData(GL_ARRAY_BUFFER, numVertices * sizeof(Vertex), vertices, GL_STATIC_DRAW);
+
+glEnableVertexAttribArray(0); // das erste Attribute (Position) aktivieren 
+glVertexAttribPointer(0,3,GL_FLOAT, GL_FALSE, sizeof(Vertex), 0 ); // 3 weil vertex mit 3 dim
+//stride, wie weit springt opengl um bei dem ersten element zu landen = sizeof(Vertex)
+//pointer: 0 weil in Vertex{ 0:float32 x, 1:...}      oder offsetof(struct Vertex, x)
