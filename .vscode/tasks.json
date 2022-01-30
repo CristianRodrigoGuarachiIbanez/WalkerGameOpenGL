@@ -8,7 +8,7 @@
             "type": "shell",
             "command": "g++",
             "args": [
-                "-g", "-std=c++14", "main.cpp","shader.cpp", "-o" ,"openGL_output", "-D", "_DEBUG", "-lGL", "-lSDL2", "-lGLEW"
+                "-g", "-std=c++14", "main_t.cpp","shader.cpp", "camera.cpp", "-o" ,"openGL_output", "-D", "_DEBUG", "-lGL", "-lSDL2", "-lGLEW"
             ],
             "group": {
                   "kind": "build",

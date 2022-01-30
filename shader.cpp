@@ -7,9 +7,7 @@ SHADER::SHADER(const char* vertexShaderFilename, const char*fragmentShaderFilena
 }
 SHADER::~SHADER(){
     glDeleteProgram(shaderID);
-
 }
-
 
 void SHADER::bind(){
     glUseProgram(shaderID);
@@ -44,7 +42,7 @@ std::string SHADER::parse(const char* filename){
     file = fopen(filename, "rb");
     if(file==nullptr){
         std::cout <<"File"<<filename<<"not found"<<std::endl;
-        return 0;
+        return "";
     }
     std::string contents;
     fseek(file,0,SEEK_END); //wird die Größe der Datei erstmal gelesen, 

@@ -1,17 +1,22 @@
 #version 130  
-//in vec3 a_position;
-//in vec4 a_color;
+
+
 attribute vec3 a_position;
+attribute vec2 a_textCoord;
 attribute vec4 a_color;
 
-//out vec4 v_color;
+
 varying vec4 v_color;
+varying vec2 v_textCoord;
+
+uniform mat4 u_model;
 
 void main(void){
-    //convert vec3 to vec4;
-    gl_Position = vec4(a_position,1.0f);
+   
+    gl_Position = u_model * vec4(a_position,1.0f);
     v_color = a_color;
-    //v_color = gl_Color;
+
+    v_textCoord = a_textCoord;
 
      
 }
