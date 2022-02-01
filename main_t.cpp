@@ -7,7 +7,7 @@
 #include "libs/glm/glm.hpp"
 #include "libs/glm/ext/matrix_transform.hpp"
 #include "libs/glm/gtc/matrix_transform.hpp"
-#include "camera.h"
+#include "floating_camera.h"
 #ifdef _WIN32
 #include <SDL.h>
 #pragma comment(lib, "SDL2.lib")
@@ -108,7 +108,7 @@ int main(int argc, char** argv) {
 	glm::mat4 model = glm::mat4(1.5f);
 	model = glm::scale(model, glm::vec3(2.0f, 1.0f, 1.0f));
 
-	Camera camera(90.0f, 800.0f, 600.0f);
+	FloatingCamera camera(90.0f, 800.0f, 600.0f);
 	camera.translate(glm::vec3(0.0f, 0.0f, 0.5f));
 	camera.update();
 	
@@ -124,8 +124,15 @@ int main(int argc, char** argv) {
 	bool buttons  = false;
 	bool buttond  = false;
 	bool buttona  = false;
+
+	bool buttonSpace = false;
+	bool buttonShift = false;
+
+
+	float cameraSpeed= 6.0f;
 	float time = 0.0f;
 	bool close = false;
+	SDL_SetRelativeMouseMode(SDL_TRUE);
 	while(!close) {
 
 		////////////////// Events ///////////////
@@ -135,16 +142,7 @@ int main(int argc, char** argv) {
 			if(event.type == SDL_QUIT) {
 				close = true;
 			}else if(event.type == SDL_KEYDOWN){
-				//if(event.key.keysym.sym == SDLK_p && event.key.keysym.mod & KMOD_LCTRL){
-					/*
-					if(is_ortho){
-						projection = perspective;
-						 
-					} else{
-						projection = ortho;
-					}	*/	
-				//}
-				//is_ortho = !is_ortho;
+				
 				switch (event.key.keysym.sym){
 					case SDLK_d:
 						buttond = true;
@@ -157,6 +155,12 @@ int main(int argc, char** argv) {
 						break;
 					case SDLK_s:
 						buttons = true;
+						break;
+					case SDLK_SPACE:
+						buttonSpace = true;
+						break;
+					case SDLK_LSHIFT:
+						buttonShift = true;
 						break;
 				}
 					
@@ -176,7 +180,15 @@ int main(int argc, char** argv) {
 				case SDLK_s:
 					buttons = false;
 					break;
+				case SDLK_SPACE:
+					buttonSpace = false;
+					break;
+				case SDLK_LSHIFT:
+					buttonShift = false;
+					break;
 				}
+			}else if(event.type == SDL_MOUSEMOTION){
+				camera.onMausMove(event.motion.xrel, event.motion.yrel);
 			}
 			
 		}
@@ -186,13 +198,21 @@ int main(int argc, char** argv) {
 		time += delta;
 
 		if(buttonw){
-			camera.translate(glm::vec3(0.0f, 0.0f, -1.0f * delta));
-		}else if(buttons){
-			camera.translate(glm::vec3(0.0f, 0.0f, 1.0f * delta));
-		}else if(buttona){
-			camera.translate(glm::vec3(-1.0f*delta, 0.0f, 0.0f));
-		}else if(buttond){
-			camera.translate(glm::vec3(1.0f*delta, 0.0f, 0.0f));
+			//camera.translate(glm::vec3(0.0f, 0.0f, -1.0f * delta));
+			camera.moveFront(delta * cameraSpeed);
+		}if(buttons){
+			//camera.translate(glm::vec3(0.0f, 0.0f, 1.0f * delta));
+			camera.moveFront(-delta*cameraSpeed);
+		}if(buttona){
+			//camera.translate(glm::vec3(1.0f*delta, 0.0f, 0.0f));
+			camera.moveSideways(-delta * cameraSpeed);
+		}if(buttond){
+			//camera.translate(glm::vec3(-1.0f*delta, 0.0f, 0.0f));
+			camera.moveSideways(delta * cameraSpeed);
+		}if(buttonSpace) {
+			camera.moveUp(delta * cameraSpeed);
+		}if(buttonShift) {
+			camera.moveUp(-delta * cameraSpeed);
 		}
 		camera.update();
 
