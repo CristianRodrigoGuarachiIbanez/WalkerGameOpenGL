@@ -6,7 +6,7 @@
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
-//https://www.youtube.com/watch?v=hYZNN0MTLuc&t=538s
+//https://www.youtube.com/watch?v=sP_kiODC25Q&t=250s
 // https://github.com/assimp/assimp
 
 struct Position{
