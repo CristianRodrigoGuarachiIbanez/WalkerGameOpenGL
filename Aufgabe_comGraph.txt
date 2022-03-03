@@ -1,0 +1,19 @@
+Der Umfang des Programmierprojektes entspricht in etwa den in den Übungen behandelten thematischen Schwerpunkten.
+
+Als Bewertungsmaßstab für die Projekte gelten die folgenden Anforderungen:
+
+1.- Implementation eines 3D-Modells mit einer Tiefe des Szenengraphen von >= 3,
+2.- Implementation einer Animation des Modells,
+3.- Verwendung von traditioneller und/oder moderner OpenGL-Geometrie (glBegin/glEnd und/oder VBOs),
+4.- Gestaltung von 3D Objekten mit einem Modellierungsprogramm (z.B. Blender), Import ins Projekt z.B. über den Wavefront-Loader,
+5.- Implementation einer Lichtszene mit steuerbaren OpenGL - Lichtern (Spot, direktionales Licht, Punktlicht),
+6 .- Texturierung von Teilen der Szene und Einbeziehung von Blending, z.B. für transparente Objekte,
+7.- Sinnvolle Benutzerinteraktion zum Beeinflussen von Transformationen (Modelview- und/oder Texturmatrix),
+8.- Mindestens 3 verschiedene interaktiv auswählbare Kameramodi (Observer, Walk, Fly, ...),
+9.- Darstellung der Szene in verschiedenen Modi, z.B. Flat-/Smoothshading, Wireframe-, Farb-/Beleuchtungsmodus, umschaltbares Backfaceculling,
+10.- Hilfetext für die Benutzerinteraktion (Tastenbelegung),
+11.- Kurzdokumentation mit Screenshot, Szenengraph (vereinfacht) und
+12.- Beschreibung spezifischer Funktionalität, z.B. der Animationsfunktion.
+13.- Weiterführende Implementationen, z.B. Multi-Texturierung, führen i.d.R. zur Verbesserung der Note. 
+
+

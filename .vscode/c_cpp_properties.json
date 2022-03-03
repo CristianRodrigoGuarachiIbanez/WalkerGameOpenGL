@@ -4,7 +4,8 @@
             "name": "Linux",
             "includePath": [
                 "${workspaceFolder}/**",
-                "/usr/include/SDL2/"
+                "/usr/include/SDL2/",
+                "/home/cristian/c++Project/opengl/libs/"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",
